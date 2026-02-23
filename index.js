@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const { ok } = require("node:assert");
 
 const app = express();
 
@@ -20,10 +21,28 @@ app.get("/api", (req, res) => {
     res.json({ message: "API Working ✅" });
 });
 
+const userschema = new mongoose.Schema({
+    amount: String,
+    promocode: String,
+    status: String
+}
+);
+
+const Promocode = mongoose.model('promocodes', userschema)
+
+
 /* ✅ MongoDB Connect */
-// mongoose.connect()
-//     .then(() => console.log("MongoDB Connected ✅"))
-//     .catch(err => console.log("Mongo Error:", err));
+mongoose.connect('mongodb://127.0.0.1:27017/joobearning')
+    .then(() => console.log("MongoDB Connected ✅"))
+    .catch(err => console.log("Mongo Error:", err));
+
+
+app.get('/data', async (req,res)=>{
+    const okkk = await Promocode.find();
+    res.json(okkk)
+})
+
+
 
 /* ✅ Start Server */
 const PORT = process.env.PORT || 5000;
