@@ -40,10 +40,7 @@ app.get('/data', async (req, res) => {
     res.json(okkk)
 })
 
-app.get("/api", (req, res) => {
-    const okkk = await Promocode.find();
-    res.json(okkk)
-});
+
 
 
 /* ✅ Start Server */
