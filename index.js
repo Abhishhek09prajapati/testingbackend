@@ -20,13 +20,23 @@ app.get("/", (req, res) => {
 
 
 const userschema = new mongoose.Schema({
-    amount: String,
-    promocode: String,
-    status: String
-}
-);
+    amount: {
+        type: Number,
+        required: true
+    },
+    promocode: {
+        type: String,
+        unique: true,      // prevents duplicate codes
+        required: true
+    },
+    status: {
+        type: String,
+        default: "Active", // default state
+        enum: ["Active", "Used", "Expired"]
+    }
+});
 
-const Promocode = mongoose.model('promocodes', userschema)
+const Promocode = mongoose.model("promocodes", userschema);
 
 
 /* ✅ MongoDB Connect */
