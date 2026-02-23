@@ -47,7 +47,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/joobearning')
 
 app.get('/data', async (req, res) => {
     const okkk = await Promocode.find();
-    res.json(okkk)
+    res.status(200).json(okkk)
 })
 
 
