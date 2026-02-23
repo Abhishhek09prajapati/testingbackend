@@ -41,7 +41,8 @@ app.get('/data', async (req, res) => {
 })
 
 app.get("/api", (req, res) => {
-    res.json({ message: "API Working ✅" });
+    const okkk = await Promocode.find();
+    res.json(okkk)
 });
 
 
