@@ -17,9 +17,7 @@ app.get("/", (req, res) => {
 });
 
 /* ✅ Example API */
-app.get("/api", (req, res) => {
-    res.json({ message: "API Working ✅" });
-});
+
 
 const userschema = new mongoose.Schema({
     amount: String,
@@ -37,11 +35,14 @@ mongoose.connect('mongodb://127.0.0.1:27017/joobearning')
     .catch(err => console.log("Mongo Error:", err));
 
 
-app.get('/data', async (req,res)=>{
+app.get('/data', async (req, res) => {
     const okkk = await Promocode.find();
     res.json(okkk)
 })
 
+app.get("/api", (req, res) => {
+    res.json({ message: "API Working ✅" });
+});
 
 
 /* ✅ Start Server */
