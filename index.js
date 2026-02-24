@@ -6,6 +6,7 @@ const mongodb = require("mongodb")
 const cors = require("cors");
 const { ok } = require("node:assert");
 const path = require('path')
+const userschema = require("./schema/joob.js")
 
 const app = express();
 
@@ -25,7 +26,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/joobearning")
     .then(() => console.log("MongoDB Connected ✅"))
     .catch((err) => { console.log("Mongo Error:", err) });
 
-const userschema = new mongoose.Schema();
+
 
 const Promocode = mongoose.model("Promocodes", userschema);
 const User = mongoose.model("User", userschema);
@@ -35,7 +36,7 @@ const User = mongoose.model("User", userschema);
 
 app.get('/mek', async (req, res) => {
     try {
-        const user = await User.find();
+        const user = await Promocode.find();
         res.status(200).json(user);
     } catch (err) {
         console.log(err);
