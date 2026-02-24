@@ -1,7 +1,8 @@
 require("dotenv").config();
 
 const express = require("express");
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const mongodb = require("mongodb")
 const cors = require("cors");
 const { ok } = require("node:assert");
 const path = require('path')
@@ -18,7 +19,11 @@ app.get("/", (req, res) => {
 });
 
 /* ✅ Example API */
-
+// mongodb+srv://Mywork:XTBk8BJ4jQQDooXh@myproject.25lhwvw.mongodb.net/joobearning
+/* ✅ MongoDB Connect */
+mongoose.connect("mongodb://127.0.0.1:27017/joobearning")
+    .then(() => console.log("MongoDB Connected ✅"))
+    .catch((err) => { console.log("Mongo Error:", err) });
 
 const userschema = new mongoose.Schema({
     amount: {
@@ -40,13 +45,9 @@ const userschema = new mongoose.Schema({
 const Promocode = mongoose.model("Promocodes", userschema);
 
 
-/* ✅ MongoDB Connect */
-mongoose.connect('mongodb://127.0.0.1:27017/joobearning')
-    .then(() => console.log("MongoDB Connected ✅"))
-    .catch(err => console.log("Mongo Error:", err));
 
 
-app.get('/me', async (req, res) => {
+app.get('/mek', async (req, res) => {
     try {
         const user = await Promocode.find();
         res.status(200).json(user);
