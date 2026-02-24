@@ -25,31 +25,17 @@ mongoose.connect("mongodb://127.0.0.1:27017/joobearning")
     .then(() => console.log("MongoDB Connected ✅"))
     .catch((err) => { console.log("Mongo Error:", err) });
 
-const userschema = new mongoose.Schema({
-    amount: {
-        type: Number,
-        required: true
-    },
-    promocode: {
-        type: String,
-        unique: true,      // prevents duplicate codes
-        required: true
-    },
-    status: {
-        type: String,
-        default: "Active", // default state
-        enum: ["Active", "Used", "Expired"]
-    }
-});
+const userschema = new mongoose.Schema();
 
 const Promocode = mongoose.model("Promocodes", userschema);
+const User = mongoose.model("User", userschema);
 
 
 
 
 app.get('/mek', async (req, res) => {
     try {
-        const user = await Promocode.find();
+        const user = await User.find();
         res.status(200).json(user);
     } catch (err) {
         console.log(err);
